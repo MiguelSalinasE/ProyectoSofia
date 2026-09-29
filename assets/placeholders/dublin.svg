@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Ilustración provisional de Dublín</title>
+  <desc id="desc">Un río, un puente y edificios de Dublín bajo un cielo azul.</desc>
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#345986"/><stop offset="1" stop-color="#b3a0b9"/></linearGradient>
+    <linearGradient id="water" x2="0" y2="1"><stop stop-color="#42698b"/><stop offset="1" stop-color="#182e53"/></linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#sky)"/>
+  <circle cx="950" cy="150" r="62" fill="#f5dfc5" opacity=".85"/>
+  <path d="M0 530h1200v270H0z" fill="url(#water)"/>
+  <g fill="#263653"><path d="M0 360h110v190H0zM115 410h165v140H115zM295 340h140v210H295zM445 398h100v152H445zM710 390h135v160H710zM858 350h165v200H858zM1034 414h166v136h-166z"/></g>
+  <g fill="#31486b"><path d="M28 390h40v160H28zM160 432h76v118h-76zM330 371h67v179h-67zM900 376h78v174h-78zM1070 440h80v110h-80z"/></g>
+  <g fill="#f5d6af" opacity=".8"><path d="M35 430h16v22H35zM78 430h16v22H78zM172 457h18v25h-18zM213 457h18v25h-18zM345 405h20v28h-20zM385 405h20v28h-20zM915 410h20v28h-20zM955 410h20v28h-20zM1082 470h20v28h-20z"/></g>
+  <path d="M0 550c230-5 260-125 550-125s390 120 650 125v28H0z" fill="#15233e"/>
+  <path d="M0 548c230-5 260-125 550-125s390 120 650 125" fill="none" stroke="#e9bfd1" stroke-width="13"/>
+  <path d="M0 585h1200" stroke="#8eb7d7" stroke-width="5" opacity=".6"/>
+  <path d="M105 665c180-20 255-20 420 0M645 690c180-20 255-20 420 0M130 735c240-15 440-15 680 0" fill="none" stroke="#b1c3d4" stroke-width="7" opacity=".22"/>
+  <g fill="#ffd9ee" opacity=".8"><circle cx="85" cy="120" r="3"/><circle cx="225" cy="180" r="2"/><circle cx="520" cy="94" r="3"/><circle cx="744" cy="210" r="2"/></g>
+</svg>

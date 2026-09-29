@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#fff8f2">
+    <meta name="description" content="Una historia para jugar, recordar y seguir escribiendo juntos.">
+    <title>Cuando todo falla, nos tenemos</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/redesign.css">
+    <script src="js/config.js" defer></script>
+    <script src="js/app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#story">Saltar a la historia</a>
+    <div class="sky" aria-hidden="true"><div class="sky__stars" id="sky-stars"></div></div>
+    <div class="shell">
+      <header class="topbar">
+        <div class="brand"><span class="brand__mark">✦</span><span>Una historia nuestra</span></div>
+        <div class="topbar__actions">
+          <span class="memory-count" id="memory-count" aria-label="Recuerdos recogidos">★ 0 / 9</span>
+          <button class="reset-button" type="button" data-action="reset" title="Reiniciar la historia" aria-label="Reiniciar la historia">↺</button>
+        </div>
+      </header>
+      <main id="story" class="story" tabindex="-1"></main>
+      <footer class="footer"><span id="chapter-indicator">01 / 13</span><span class="footer__line" aria-hidden="true"></span><span>Hecho para volver a encontrarnos</span></footer>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <noscript>Esta historia necesita JavaScript activado para que puedas jugarla.</noscript>
+  </body>
+</html>
