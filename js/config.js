@@ -28,11 +28,6 @@ const STORY_CONFIG = {
   playlist: {
     spotifyUrl: "https://open.spotify.com/playlist/5YerRREaAfhwe8wwx631gV"
   },
-  songs: [
-    { title: "Diferencia 2006", artist: "", note: "De aquellas primeras conversaciones.", spotifyUrl: "" },
-    { title: "Guxo", artist: "", note: "La banda sonora de esta etapa.", spotifyUrl: "" },
-    { title: "Nuestra próxima canción", artist: "", note: "Todavía nos quedan muchas por descubrir.", spotifyUrl: "" }
-  ],
   ringQuestion: {
     question: "¿Dónde empezó todo?",
     answer: "Madrid",
@@ -102,12 +97,7 @@ const STORY_CONFIG = {
     music: {
       eyebrow: "Capítulo 5 · Nuestra banda sonora",
       heading: "Canciones que guardan momentos",
-      setup: "No hace falta que suenen para volver a aquella noche.",
-      instruction: "Elige una tarjeta para descubrir su recuerdo.",
-      link: "Abrir en Spotify ↗",
-      playlistButton: "Escuchar nuestra playlist",
-      playlistTitle: "Nuestra playlist en Spotify",
-      noSongs: "Añade canciones en js/config.js para llenar esta parte de la historia."
+      playlistButton: "Abrir nuestra playlist en Spotify"
     },
     dublin: {
       eyebrow: "Capítulo 6 · Dublín",

@@ -24,11 +24,9 @@
       routeProgress: 0,
       constellationProgress: 0,
       granadaDistance: 0,
-      selectedSong: -1,
       puzzleOrder: [2, 0, 5, 1, 4, 3],
       selectedPiece: -1,
       dublinSolved: false,
-      playlistVisible: false,
       ringAttempts: 0,
       ringHint: false,
       ringOpen: false,
@@ -66,7 +64,8 @@
       }
       loaded.dublinSolved = legacyKey?.endsWith("v1") && loaded.scene === 6 ? false : Boolean(saved.dublinSolved);
       loaded.nerjaOpened = Boolean(saved.nerjaOpened);
-      loaded.playlistVisible = false;
+      delete loaded.selectedSong;
+      delete loaded.playlistVisible;
       for (const oldField of ["madridFound", "madridConcert", "walkSteps", "dialogueStarted", "dialogueIndex", "dialogueReply", "pathIndex", "problems", "berlinSolved"]) delete loaded[oldField];
       return loaded;
     } catch {
@@ -112,11 +111,6 @@
 
   function photoMoments(paths, city) {
     return `<div class="moment-strip" aria-label="Tres recuerdos de ${t(city)}">${paths.map((path, index) => `<figure class="moment-strip__frame moment-strip__frame--${index}">${photo(path, `Nosotros en ${city}, momento ${index + 1}`)}<figcaption>${String(index + 1).padStart(2, "0")} · ${t(city)}</figcaption></figure>`).join("")}</div>`;
-  }
-
-  function spotifyEmbedUrl(value) {
-    const match = String(value || "").trim().match(/^https:\/\/open\.spotify\.com\/playlist\/([A-Za-z0-9]{10,})(?:[/?#]|$)/i);
-    return match ? `https://open.spotify.com/embed/playlist/${match[1]}` : "";
   }
 
   function button(label, action, extra = "") {
@@ -172,13 +166,9 @@
 
   function renderMusic() {
     const c = copy.music;
-    const songs = config.songs || [];
-    const embedUrl = spotifyEmbedUrl(config.playlist?.spotifyUrl);
-    const cards = songs.map((song, index) => `<button class="song-card ${state.selectedSong === index ? "is-selected" : ""}" type="button" data-action="song" data-index="${index}" aria-pressed="${state.selectedSong === index}"><span class="song-card__disc" aria-hidden="true"><span></span></span><span class="song-card__info"><span class="song-card__number">TRACK ${String(index + 1).padStart(2, "0")}</span><strong>${t(song.title)}</strong><small>${t(song.artist || "Un recuerdo nuestro")}</small></span><span class="song-card__arrow" aria-hidden="true">↗</span></button>`).join("");
-    const selected = songs[state.selectedSong];
-    const link = selected && /^https:\/\//i.test(selected.spotifyUrl || "") ? `<a class="text-link" href="${safeUrl(selected.spotifyUrl)}" target="_blank" rel="noopener noreferrer">${t(c.link)}</a>` : "";
-    const playlist = embedUrl ? `<div class="playlist-embed">${state.playlistVisible ? `<iframe title="${t(c.playlistTitle)}" src="${embedUrl}" width="100%" height="352" loading="lazy" tabindex="0" allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>` : `<button class="button button--secondary" type="button" data-action="show-playlist">${t(c.playlistButton)} <span aria-hidden="true">♫</span></button>`}</div>` : "";
-    return page(c.eyebrow, c.heading, `<p class="scene__lead">${t(c.setup)}</p><div class="music-player"><div class="music-player__top"><span>✦ NUESTRA PLAYLIST</span><span>UNA CANCIÓN CADA VEZ</span></div><div class="music-player__display"><div class="music-player__art" aria-hidden="true">♫</div><div><span class="music-player__label">AHORA RECORDANDO</span><strong>${selected ? t(selected.title) : "—"}</strong><p>${selected ? t(selected.note) : t(c.instruction)}</p>${link}</div></div><div class="music-player__timeline" aria-hidden="true"><span></span></div><div class="song-list">${cards || `<p class="subtle">${t(c.noSongs)}</p>`}</div></div>${playlist}<div class="scene__actions">${button(copy.nextChapter, "next")}</div>`);
+    const url = safeUrl(config.playlist?.spotifyUrl);
+    const playlistLink = url ? `<a class="music-playlist-link" href="${url}" target="_blank" rel="noopener noreferrer">${t(c.playlistButton)} <span aria-hidden="true">↗</span></a>` : "";
+    return page(c.eyebrow, c.heading, `${playlistLink}<div class="scene__actions">${button(copy.nextChapter, "next")}</div>`);
   }
 
   function renderDublin() {
@@ -282,10 +272,8 @@
     const active = document.activeElement;
     const activeAction = active?.dataset?.action;
     const activeIndex = active?.dataset?.index;
-    const playingEmbed = state.scene === 5 ? story.querySelector(".playlist-embed iframe") : null;
     save();
     render(focusHeading);
-    if (playingEmbed && state.scene === 5) story.querySelector(".playlist-embed iframe")?.replaceWith(playingEmbed);
     if (!focusHeading && activeAction) {
       const selector = `[data-action="${activeAction}"]${activeIndex === undefined ? "" : `[data-index="${activeIndex}"]`}`;
       let nextFocus = story.querySelector(selector);
@@ -347,14 +335,6 @@
       update();
     }
     if (action === "path-star") activateStar(index);
-    if (action === "song") { state.selectedSong = index; subtleFeedback(); update(); }
-    if (action === "show-playlist") {
-      if (spotifyEmbedUrl(config.playlist?.spotifyUrl)) {
-        state.playlistVisible = true;
-        update();
-        story.querySelector("iframe")?.focus({ preventScroll: true });
-      }
-    }
     if (action === "puzzle-tile") {
       if (state.selectedPiece < 0) { state.selectedPiece = index; update(); }
       else if (state.selectedPiece === index) { state.selectedPiece = -1; update(); }

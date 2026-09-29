@@ -159,20 +159,11 @@ body { background: #fff8f2; }
 .moment-strip__frame--1 .photo__image, .moment-strip__frame--2 .photo__image { object-position: center 35%; }
 .moment-strip__frame figcaption { margin: .65rem .35rem 0; color: #605266; font-size: .65rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
 
-/* Tarjetas musicales y playlist opcional. */
-.music-player { max-width: 900px; border-color: #dbc4d4; border-radius: 20px; background: #fffaf7ed; box-shadow: 0 20px 48px #a18b9b3b; }
-.music-player__top { color: #8b7084; }
-.music-player__display { grid-template-columns: 175px 1fr; }
-.music-player__display strong { color: #44364b; }
-.music-player__display p, .song-card__info small { color: #76687a; }
-.music-player__art { background: radial-gradient(circle at 50% 50%, #faf0ee 0 10%, #ce87ab 11% 14%, #7e6689 15% 27%, #e1a9c0 28% 30%, #685678 31% 50%); }
-.music-player__timeline { background: #e6d8e2; }
-.song-card { color: #4e3d54; }
-.song-card:hover, .song-card.is-selected { background: #f8e9ef; border-color: #d9afc7; }
-.song-card__disc { background: repeating-radial-gradient(circle, #8c7494 0 4px, #dfbfd0 5px 6px, #947d9a 7px 10px); }
+/* Un único enlace visible a la playlist, sin reproductor incrustado. */
+.music-playlist-link { display: inline-flex; align-items: center; justify-content: space-between; gap: 1rem; max-width: 100%; margin: 2rem 0; padding: 1rem 1.3rem; border: 1px solid #d9afc7; border-radius: 14px; background: #fffaf7; box-shadow: 0 12px 28px #a18b9b30; color: #81416b; font-weight: 700; text-decoration: none; }
+.music-playlist-link:hover, .music-playlist-link:focus-visible { background: #f8e9ef; border-color: #b86d9b; }
+.music-playlist-link span { font-size: 1.2rem; }
 .text-link { color: #9b4576; }
-.playlist-embed { max-width: 900px; margin: 1.3rem 0 .4rem; }
-.playlist-embed iframe { display: block; width: 100%; max-width: 900px; border: 0; border-radius: 14px; }
 
 /* Puzzle conservado; la foto tiene todo el protagonismo. */
 .scene--dublin .puzzle, .scene--dublin .dublin-complete__photo { aspect-ratio: 4 / 3; }
@@ -251,7 +242,6 @@ body { background: #fff8f2; }
   .moment-strip { display: flex; overflow-x: auto; gap: .8rem; padding: 0 .4rem 1.4rem; scroll-snap-type: x mandatory; }
   .moment-strip__frame { flex: 0 0 min(72vw, 280px); scroll-snap-align: center; }
   .moment-strip__frame .photo__image, .moment-strip__frame .photo__placeholder { height: 250px; }
-  .music-player__display { grid-template-columns: 105px 1fr; }
   .nickname-memory { grid-template-columns: 1fr; gap: 1rem; text-align: center; }
   .nickname-memory__photo { width: min(75vw, 330px); margin: auto; }
   .nickname-memory__copy .scene__actions { align-items: center; }
@@ -272,7 +262,6 @@ body { background: #fff8f2; }
   .route-node--2 { left: 67%; }
   .bar-light { width: 75px; height: 75px; }
   .granada-sky { height: 380px; }
-  .music-player__display { grid-template-columns: 86px 1fr; }
 }
 @media (prefers-reduced-motion: reduce) {
   .granada-reveal__line, .scene__actions--delayed, .heart-star, .dublin-complete__lines p { opacity: 1; }
