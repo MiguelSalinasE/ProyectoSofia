@@ -113,6 +113,11 @@
     return `<div class="moment-strip" aria-label="Tres recuerdos de ${t(city)}">${paths.map((path, index) => `<figure class="moment-strip__frame moment-strip__frame--${index}">${photo(path, `Nosotros en ${city}, momento ${index + 1}`)}<figcaption>${String(index + 1).padStart(2, "0")} · ${t(city)}</figcaption></figure>`).join("")}</div>`;
   }
 
+  function spotifyEmbedUrl(value) {
+    const match = String(value || "").trim().match(/^https:\/\/open\.spotify\.com\/playlist\/([A-Za-z0-9]+)(?:[/?#]|$)/i);
+    return match ? `https://open.spotify.com/embed/playlist/${match[1]}` : "";
+  }
+
   function button(label, action, extra = "") {
     return `<button class="button ${extra}" type="button" data-action="${action}">${t(label)}<span aria-hidden="true"> ↗</span></button>`;
   }
@@ -166,9 +171,11 @@
 
   function renderMusic() {
     const c = copy.music;
-    const url = safeUrl(config.playlist?.spotifyUrl);
-    const playlistLink = url ? `<a class="music-playlist-link" href="${url}" target="_blank" rel="noopener noreferrer">${t(c.playlistButton)} <span aria-hidden="true">↗</span></a>` : "";
-    return page(c.eyebrow, c.heading, `${playlistLink}<div class="scene__actions">${button(copy.nextChapter, "next")}</div>`);
+    const embedUrl = spotifyEmbedUrl(config.playlist?.spotifyUrl);
+    const playlist = embedUrl
+      ? `<div class="playlist-embed"><iframe title="${t(c.playlistTitle)}" src="${embedUrl}" width="100%" height="352" loading="lazy" allow="encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe></div>`
+      : `<p class="subtle">${t(c.missingPlaylist)}</p>`;
+    return page(c.eyebrow, c.heading, `${playlist}<div class="scene__actions">${button(copy.nextChapter, "next")}</div>`);
   }
 
   function renderDublin() {

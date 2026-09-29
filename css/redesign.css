@@ -159,10 +159,9 @@ body { background: #fff8f2; }
 .moment-strip__frame--1 .photo__image, .moment-strip__frame--2 .photo__image { object-position: center 35%; }
 .moment-strip__frame figcaption { margin: .65rem .35rem 0; color: #605266; font-size: .65rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
 
-/* Un único enlace visible a la playlist, sin reproductor incrustado. */
-.music-playlist-link { display: inline-flex; align-items: center; justify-content: space-between; gap: 1rem; max-width: 100%; margin: 2rem 0; padding: 1rem 1.3rem; border: 1px solid #d9afc7; border-radius: 14px; background: #fffaf7; box-shadow: 0 12px 28px #a18b9b30; color: #81416b; font-weight: 700; text-decoration: none; }
-.music-playlist-link:hover, .music-playlist-link:focus-visible { background: #f8e9ef; border-color: #b86d9b; }
-.music-playlist-link span { font-size: 1.2rem; }
+/* La playlist aparece directamente, sin tarjetas ni otro reproductor. */
+.playlist-embed { width: min(100%, 900px); margin: 1.5rem 0; }
+.playlist-embed iframe { display: block; width: 100%; border: 0; border-radius: 14px; }
 .text-link { color: #9b4576; }
 
 /* Puzzle conservado; la foto tiene todo el protagonismo. */
