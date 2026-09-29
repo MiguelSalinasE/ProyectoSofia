@@ -27,6 +27,7 @@
       puzzleOrder: [2, 0, 5, 1, 4, 3],
       selectedPiece: -1,
       dublinSolved: false,
+      playlistVisible: false,
       ringAttempts: 0,
       ringHint: false,
       ringOpen: false,
@@ -65,7 +66,7 @@
       loaded.dublinSolved = legacyKey?.endsWith("v1") && loaded.scene === 6 ? false : Boolean(saved.dublinSolved);
       loaded.nerjaOpened = Boolean(saved.nerjaOpened);
       delete loaded.selectedSong;
-      delete loaded.playlistVisible;
+      loaded.playlistVisible = false;
       for (const oldField of ["madridFound", "madridConcert", "walkSteps", "dialogueStarted", "dialogueIndex", "dialogueReply", "pathIndex", "problems", "berlinSolved"]) delete loaded[oldField];
       return loaded;
     } catch {
@@ -172,8 +173,10 @@
   function renderMusic() {
     const c = copy.music;
     const embedUrl = spotifyEmbedUrl(config.playlist?.spotifyUrl);
-    const playlist = embedUrl
-      ? `<div class="playlist-embed"><iframe title="${t(c.playlistTitle)}" src="${embedUrl}" width="100%" height="352" loading="lazy" allow="encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe></div>`
+    const playlist = embedUrl && state.playlistVisible
+      ? `<div class="playlist-embed"><iframe title="${t(c.playlistTitle)}" src="${embedUrl}" width="100%" height="352" loading="lazy" tabindex="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe></div>`
+      : embedUrl
+        ? button(c.playlistButton, "show-playlist")
       : `<p class="subtle">${t(c.missingPlaylist)}</p>`;
     return page(c.eyebrow, c.heading, `${playlist}<div class="scene__actions">${button(copy.nextChapter, "next")}</div>`);
   }
@@ -342,6 +345,11 @@
       update();
     }
     if (action === "path-star") activateStar(index);
+    if (action === "show-playlist") {
+      state.playlistVisible = true;
+      update();
+      story.querySelector(".playlist-embed iframe")?.focus({ preventScroll: true });
+    }
     if (action === "puzzle-tile") {
       if (state.selectedPiece < 0) { state.selectedPiece = index; update(); }
       else if (state.selectedPiece === index) { state.selectedPiece = -1; update(); }

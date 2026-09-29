@@ -159,7 +159,7 @@ body { background: #fff8f2; }
 .moment-strip__frame--1 .photo__image, .moment-strip__frame--2 .photo__image { object-position: center 35%; }
 .moment-strip__frame figcaption { margin: .65rem .35rem 0; color: #605266; font-size: .65rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
 
-/* La playlist aparece directamente, sin tarjetas ni otro reproductor. */
+/* El reproductor de Spotify aparece al pulsar el botón del capítulo. */
 .playlist-embed { width: min(100%, 900px); margin: 1.5rem 0; }
 .playlist-embed iframe { display: block; width: 100%; border: 0; border-radius: 14px; }
 .text-link { color: #9b4576; }

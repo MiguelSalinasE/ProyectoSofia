@@ -97,6 +97,7 @@ const STORY_CONFIG = {
     music: {
       eyebrow: "Capítulo 5 · Nuestra banda sonora",
       heading: "Canciones que guardan momentos",
+      playlistButton: "Escuchar nuestra playlist",
       playlistTitle: "Nuestra playlist en Spotify",
       missingPlaylist: "Añade el enlace de la playlist en js/config.js."
     },
